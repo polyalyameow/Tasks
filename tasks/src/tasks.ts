@@ -7,19 +7,25 @@ type Task = {
     isCompleted: boolean;
 }
 
+// Tasks array intitialized by loading data from local storage
 const tasks: Task[] = loadTasks();
 
+// each tasks from local storage gets rendered
 tasks.forEach(renderTask);
 
 function loadTasks(): Task[]{
     const storedTasks = localStorage.getItem('Tasks')
+    // if there are stored tasks, then parse them. Otherwise, return empty array
     return storedTasks ? JSON.parse(storedTasks) : []
 }
 
+// form submission
 taskForm?.addEventListener('submit', (event) => {
     event.preventDefault();
+    // gets task description from input
     const taskDescription = formInput?.value
-    if(taskDescription) {
+    if(taskDescription && taskDescription.length > 3) {
+        // if imput is not 
         const task: Task ={
             description: taskDescription,
             isCompleted: false
